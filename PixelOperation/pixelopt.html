@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script> 
+        window.onload = function()
+        {  
+            var cnv = document.getElementById("canvas");
+            var cxt=cnv.getContext("2d");
+
+            var image=new Image();
+            image.src= "image/Gundam.jpeg";
+
+            image.onload= function(             )
+            {
+                cxt.drawImage(image,0,0,cnv.clientWidth,cnv.clientHeight); 
+                PixelOperationFunc();
+            }
+        }
+    </script>
+    <script type="text/javascript" src="script/pixelopt.js"></script>  
+</head>
+<body>
+    <label>图片处理效果：</label>
+    <select id="imageEffect" name="mochu" onchange="PixelOperationFunc()">
+        <option selected>反转效果</option>
+        <option >黑白效果</option>
+        <option >亮度效果</option>
+        <option >复古效果</option>
+        <option >蒙版效果</option>
+        <option >透明效果</option>
+        <option >浮雕效果</option>
+    </select>
+    <label>灰度算法：</label>
+    <select id="bwExpress" name="grayOpt" onchange="InvokeImageOpt(1)">
+        <option selected>平均值</option>
+        <option >加权值</option>
+        <option >最大值</option>
+    </select>
+    <label>颜色通道：</label>
+    <select id="channelColor" name="grayOpt" onchange="InvokeImageOpt(4)">
+        <option selected>红</option>
+        <option >绿</option>
+        <option >蓝</option>
+    </select>
+    <br>
+    <br>
+    <canvas id="canvas" width="400" height="300" style="border:1px dashed gray;"></canvas>
+    <canvas id="inverse" width="400" height="300" style="border:1px dashed gray;"></canvas>
+    <script>
+        function InvokeImageOpt(effectIndex)
+        {
+            var effect = document.getElementById("imageEffect");
+            if(effect.selectedIndex==effectIndex)
+            {
+                PixelOperationFunc();
+            }
+        }
+    </script>
+</body>
+</html>
